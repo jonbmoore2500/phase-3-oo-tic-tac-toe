@@ -27,7 +27,7 @@ class TicTacToe
 
     def input_to_index(input_string)
         arr_value = Integer(input_string) - 1
-        # rescue ArgumentError
+        rescue ArgumentError
     end
 
     def move(board_index, x_or_o)
@@ -42,7 +42,7 @@ class TicTacToe
 
     def valid_move?(position)
         position.between?(0,8) && !position_taken?(position)
-    # rescue NoMethodError
+    rescue NoMethodError
     end
 
     def turn_count
