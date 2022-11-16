@@ -25,15 +25,12 @@ class TicTacToe
         puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
     end
 
-    def input_to_index(input_string)
-        arr_value = Integer(input_string) - 1
-        rescue ArgumentError
+    def input_to_index(input)
+        arr_value = input.to_i - 1
     end
 
     def move(board_index, x_or_o)
-        if ["X", "O"].include?(x_or_o) then
-            @board[board_index] = x_or_o
-        end
+        ["X", "O"].include?(x_or_o) ? @board[board_index] = x_or_o : nil
     end
 
     def position_taken?(position)
@@ -42,7 +39,6 @@ class TicTacToe
 
     def valid_move?(position)
         position.between?(0,8) && !position_taken?(position)
-    rescue NoMethodError
     end
 
     def turn_count
@@ -54,15 +50,9 @@ class TicTacToe
     end 
 
     def turn
-        # streamline
-        input = gets
-        mod_input = input_to_index(input)
-        if valid_move?(mod_input) then
-            move(mod_input, current_player)
-            display_board
-        else
-            turn
-        end 
+        mod_input = input_to_index(gets)
+        valid_move?(mod_input) ? move(mod_input, current_player) : turn
+        display_board
     end
 
     def won?
@@ -84,10 +74,7 @@ class TicTacToe
     end
 
     def winner
-        # streamline
-        if won? != nil then
-            current_player == "X" ? "O" : "X"
-        end
+        won? ? (current_player == "X" ? "O" : "X") : nil
     end
 
     def play
